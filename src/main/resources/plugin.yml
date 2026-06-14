@@ -1,0 +1,10 @@
+name: FluidHopper
+version: "1.0"
+main: com.example.fluidhopper.FluidHopperPlugin
+api-version: "26.1"
+description: A plugin that provides hoppers capable of moving fluids.
+
+commands:
+  fluidhopper:
+    description: Commands for Fluid Hopper
+    usage: /fluidhopper give
