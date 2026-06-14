@@ -14,11 +14,7 @@ Welcome to the **Fluid Hopper** plugin! This plugin introduces a new mechanic to
 
 You can craft a Fluid Hopper using the exact same shape as a vanilla hopper, but replace the Chest with an **Empty Bucket**.
 
-```text
-[ Iron Ingot ] [            ] [ Iron Ingot ]
-[ Iron Ingot ] [   Bucket   ] [ Iron Ingot ]
-[            ] [ Iron Ingot ] [            ]
-```
+![Crafting Recipe](images/crafting_recipe.png)
 
 ## Installation
 
