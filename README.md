@@ -55,3 +55,7 @@ If you wish to compile the plugin yourself:
    ./gradlew build
    ```
 4. The compiled plugin will be located in `build/libs/fluid-hopper-1.0-SNAPSHOT.jar`.
+
+## Support
+
+Do you like our work? Support us on [Ko-Fi](https://ko-fi.com/eyeskiller)!
