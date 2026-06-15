@@ -8,6 +8,7 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
+import online.bechatbot.analytics.AnalyticsTracker;
 
 public class FluidHopperPlugin extends JavaPlugin {
 
@@ -15,6 +16,9 @@ public class FluidHopperPlugin extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        AnalyticsTracker analytics = new AnalyticsTracker(this, "https://analytics.bechatbot.online/api/track");
+        analytics.sendEvent("STARTUP");
+
         // Save default config if needed, we just use a data folder
         if (!getDataFolder().exists()) {
             getDataFolder().mkdirs();

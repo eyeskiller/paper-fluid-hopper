@@ -18,7 +18,7 @@ You can craft a Fluid Hopper using the exact same shape as a vanilla hopper, but
 
 ## Installation
 
-1. Download the latest `fluid-hopper-1.0-SNAPSHOT.jar` file from the releases (or build it from source).
+1. Download the latest `fluid-hopper-1.0.2.jar` file from the releases (or build it from source).
 2. Stop your Minecraft server.
 3. Place the `.jar` file into your server's `plugins` folder.
 4. Start your server. The plugin will automatically generate a data folder to keep track of your placed Fluid Hoppers.
@@ -54,7 +54,7 @@ If you wish to compile the plugin yourself:
    ```bash
    ./gradlew build
    ```
-4. The compiled plugin will be located in `build/libs/fluid-hopper-1.0-SNAPSHOT.jar`.
+4. The compiled plugin will be located in `build/libs/fluid-hopper-1.0.2.jar`.
 
 ## Support
 

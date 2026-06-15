@@ -1,5 +1,8 @@
 # Fluid Hopper Changelog
 
+## Version 1.0.2
+- Integrated Plugin Analytics API for asynchronous usage tracking.
+
 ## Version 1.0.1
 - Fixed chunk thrashing by checking if chunks are loaded before checking hopper state.
 - Fixed `ConcurrentModificationException` risk by using `ConcurrentHashMap.newKeySet()` for stored locations.
