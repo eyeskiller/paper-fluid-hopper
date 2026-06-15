@@ -23,14 +23,18 @@ public class HopperTickTask implements Runnable {
     @Override
     public void run() {
         Iterator<Location> iterator = plugin.getHopperManager().getFluidHoppers().iterator();
+        boolean needsSave = false;
         while (iterator.hasNext()) {
             Location loc = iterator.next();
             if (!loc.isWorldLoaded()) continue;
+            
+            // Prevent unloaded chunks from being constantly loaded
+            if (!loc.getWorld().isChunkLoaded(loc.getBlockX() >> 4, loc.getBlockZ() >> 4)) continue;
 
             Block block = loc.getBlock();
             if (block.getType() != Material.HOPPER) {
                 iterator.remove();
-                plugin.getHopperManager().save();
+                needsSave = true;
                 continue;
             }
 
@@ -38,6 +42,10 @@ public class HopperTickTask implements Runnable {
                 processIntake(hopper);
                 processOutput(hopper, block);
             }
+        }
+        
+        if (needsSave) {
+            plugin.getHopperManager().save();
         }
     }
 

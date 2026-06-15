@@ -8,12 +8,14 @@ import java.io.IOException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
 
 public class HopperManager {
     private final FluidHopperPlugin plugin;
-    private final Set<Location> fluidHoppers = new HashSet<>();
+    private final Set<Location> fluidHoppers = ConcurrentHashMap.newKeySet();
     private final File dataFile;
+    private final Object saveLock = new Object();
 
     public HopperManager(FluidHopperPlugin plugin) {
         this.plugin = plugin;
@@ -52,16 +54,30 @@ public class HopperManager {
     }
 
     public void save() {
-        YamlConfiguration config = new YamlConfiguration();
-        config.set("locations", fluidHoppers.toArray(new Location[0]));
-        try {
-            config.save(dataFile);
-        } catch (IOException e) {
-            plugin.getLogger().log(Level.SEVERE, "Failed to save hoppers.yml", e);
+        Location[] locationsToSave = fluidHoppers.toArray(new Location[0]);
+        synchronized (saveLock) {
+            YamlConfiguration config = new YamlConfiguration();
+            config.set("locations", locationsToSave);
+            try {
+                config.save(dataFile);
+            } catch (IOException e) {
+                plugin.getLogger().log(Level.SEVERE, "Failed to save hoppers.yml", e);
+            }
         }
     }
 
     private void saveAsync() {
-        plugin.getServer().getScheduler().runTaskAsynchronously(plugin, this::save);
+        Location[] locationsToSave = fluidHoppers.toArray(new Location[0]);
+        plugin.getServer().getScheduler().runTaskAsynchronously(plugin, () -> {
+            synchronized (saveLock) {
+                YamlConfiguration config = new YamlConfiguration();
+                config.set("locations", locationsToSave);
+                try {
+                    config.save(dataFile);
+                } catch (IOException e) {
+                    plugin.getLogger().log(Level.SEVERE, "Failed to save hoppers.yml", e);
+                }
+            }
+        });
     }
 }
