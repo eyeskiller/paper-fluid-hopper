@@ -8,16 +8,18 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
-import online.bechatbot.analytics.AnalyticsTracker;
+import com.example.fluidhopper.bstats.Metrics;
 
 public class FluidHopperPlugin extends JavaPlugin {
 
+    private static final int BSTATS_PLUGIN_ID = 32226;
+
     private HopperManager hopperManager;
+    private Metrics metrics;
 
     @Override
     public void onEnable() {
-        AnalyticsTracker analytics = new AnalyticsTracker(this, "https://analytics.bechatbot.online/api/track");
-        analytics.sendEvent("STARTUP");
+        metrics = new Metrics(this, BSTATS_PLUGIN_ID);
 
         // Save default config if needed, we just use a data folder
         if (!getDataFolder().exists()) {
@@ -49,6 +51,9 @@ public class FluidHopperPlugin extends JavaPlugin {
     public void onDisable() {
         if (hopperManager != null) {
             hopperManager.save();
+        }
+        if (metrics != null) {
+            metrics.shutdown();
         }
         getLogger().info("FluidHopper has been disabled!");
     }

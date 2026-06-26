@@ -1,5 +1,8 @@
 # Fluid Hopper Changelog
 
+## Version 1.0.3
+- Replaced custom analytics with [bStats](https://bstats.org/plugin/bukkit/FluidHopper/32226) metrics (opt-out via `plugins/bStats/config.yml`).
+
 ## Version 1.0.2
 - Integrated Plugin Analytics API for asynchronous usage tracking.
 

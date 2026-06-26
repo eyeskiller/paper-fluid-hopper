@@ -1,5 +1,5 @@
 name: FluidHopper
-version: "1.0"
+version: "1.0.3"
 main: com.example.fluidhopper.FluidHopperPlugin
 api-version: "26.1"
 description: A plugin that provides hoppers capable of moving fluids.
